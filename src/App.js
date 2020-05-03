@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from './components/Header';
+import Shop from './components/Shop';
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
@@ -42,7 +44,17 @@ class App extends Component {
       selected
     });
   };
-
+/*
+  render(){
+    return (
+      <div className="App">
+        <Header />
+        <Shop />
+      </div>
+    )
+  }
+*/
+  
   render() {
     const features = Object.keys(this.props.features).map((feature, idx) => {
       const featureHash = feature + '-' + idx;
@@ -97,10 +109,18 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
+        <Header />
+        {/* <header>
           <h1>ELF Computing | Laptops</h1>
-        </header>
-        <main>
+        </header> */}
+        <Shop
+          features={ features }
+          summary={ summary }
+          total={ total }
+          USCurrencyFormat={ USCurrencyFormat }
+          updateFeatures={this.updateFeatures}
+        />
+        {/* <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
             {features}
@@ -115,7 +135,7 @@ class App extends Component {
               </div>
             </div>
           </section>
-        </main>
+        </main> */}
       </div>
     );
   }

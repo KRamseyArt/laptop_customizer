@@ -1,22 +1,29 @@
 import React, { Component } from 'react'
 import SummaryTotal from './SummaryTotal';
+import SummaryItem from './SummaryItem';
+import './Summary.css'
 
 export class Summary extends Component {
   render() {
+    const summary = Object.keys(this.props.selected).map((feature, idx) => {
+      return (
+        <SummaryItem
+          feature={feature}
+          idx={idx}
+          key={idx}
+          selected={this.props.selected}
+        />
+      );
+    });
+
     return (
       <section className="main__summary">
         <h2>Your cart</h2>
-        {this.props.summary}
+        {summary}
         <SummaryTotal 
-          USCurrencyFormat={this.props.USCurrencyFormat}
+          selected={this.props.selected}
           total={this.props.total}
         />
-        {/* <div className="summary__total">
-          <div className="summary__total__label">Total</div>
-          <div className="summary__total__value">
-            {this.props.USCurrencyFormat.format(this.props.total)}
-          </div>
-        </div> */}
       </section>
     )
   }

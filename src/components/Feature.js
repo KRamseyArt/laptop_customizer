@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
 import FeatureOption from './FeatureOption';
+import './Feature.css';
 
 export class Feature extends Component {
   render() {
-    const feature = this.props.feature.props.children
+    const featureHash = this.props.feature + '-' + this.props.idx;
+    const options = this.props.features[this.props.feature].map(item => {
+
+      return (
+        <FeatureOption
+          item={item}
+          feature={this.props.feature}
+          selected={this.props.selected}
+          updateFeature={this.props.updateFeature}
+        />
+      );
+    });
 
     return (
-      <>
-        <h4>{feature[0]}</h4>
-        {feature[1].map((option,id) => {
-          return <FeatureOption key={id} option={option}/>
-        })}
-      </>
-    )
+      <fieldset className="feature" key={featureHash}>
+        <legend className="feature__name">
+          <h3>{this.props.feature}</h3>
+        </legend>
+        {options}
+      </fieldset>
+    );
   }
 }
 
